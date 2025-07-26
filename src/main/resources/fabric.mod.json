@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "slime-no-more",
+	"version": "${version}",
+	"name": "Slime No More",
+	"description": "Simple Mod to Enable/Disable Slime Chunk Spawning",
+	"authors": [
+		"PolarbearBytes"
+	],
+	"contact": {
+		"homepage": "https://github.com/PolarbearBytes/WalkTheLine",
+		"sources": "https://github.com/PolarbearBytes/WalkTheLine"
+	},
+	"license": "MIT",
+	"icon": "assets/slime-no-more/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "games.polarbearbytes.slimenomore.SlimeNoMore"
+		],
+		"client": [
+          "games.polarbearbytes.slimenomore.SlimeNoMoreClient"
+		]
+	},
+	"mixins": [
+		"slime-no-more.mixins.json",
+		{
+			"config": "slime-no-more.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

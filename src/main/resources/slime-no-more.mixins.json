@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "games.polarbearbytes.slimenomore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SlimeEntityMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

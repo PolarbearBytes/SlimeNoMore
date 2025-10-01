@@ -6,14 +6,13 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 /**
  * Our keybind handler class
  */
 public class KeyInputHandler {
-    public static final KeyBinding.Category KEY_CATEGORY_KEYS = KeyBinding.Category.create(Identifier.of("slime-no-more","key.category.slimenomore.keys"));
+    public static final String KEY_CATEGORY_KEYS = "key.category.slimenomore.keys";
     public static final String KEY_TOGGLE_SLIMECHUNK = "key.slimenomore.toggleslimechunk";
     public static KeyBinding toggleSlimeChunkKey;
 

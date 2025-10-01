@@ -5,6 +5,7 @@
   "mixins": [
     "SlimeEntityMixin"
   ],
+  "client": [],
   "server": [],
   "injectors": {
     "defaultRequire": 1

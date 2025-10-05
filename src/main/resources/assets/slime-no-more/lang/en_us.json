@@ -5,6 +5,7 @@
   "key.slimenomore.togglesboxdisplay": "Toggle Overlay Box",
   "key.slimenomore.togglesbillboarddisplay": "Toggle Billboard Overlay",
 
+  "text.autoconfig.slimenomore.title": "Slime No More Config",
   "text.autoconfig.slimenomore.option.renderBox": "Render Box Overlay",
   "text.autoconfig.slimenomore.option.renderBillboard": "Render Overlay Indicator",
   "text.autoconfig.slimenomore.option.maxSlimeChunks": "Max Number of Overlays to Render"

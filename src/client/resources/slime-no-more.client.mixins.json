@@ -3,11 +3,11 @@
   "package": "games.polarbearbytes.slimenomore.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-
   ]
 }

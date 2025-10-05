@@ -85,9 +85,8 @@ public class SlimeChunksState extends PersistentState {
 
     public List<ChunkPos> getList(){
         ArrayList<ChunkPos> list = new ArrayList<>();
-
         for(Map.Entry<ChunkPos, Boolean> entry : slimeChunkStates.entrySet()){
-            if(entry.getValue()){
+            if(!entry.getValue()){
                 list.add(entry.getKey());
             }
         }

@@ -20,6 +20,9 @@
 		],
 		"client": [
           "games.polarbearbytes.slimenomore.SlimeNoMoreClient"
+		],
+		"modmenu": [
+		  "games.polarbearbytes.slimenomore.integration.ModMenuIntegration"
 		]
 	},
 	"mixins": [
@@ -33,6 +36,7 @@
 		"fabricloader": ">=0.16.9",
 		"minecraft": ">=1.21.9-",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"fabric-permissions-api-v0": "*"
 	}
 }

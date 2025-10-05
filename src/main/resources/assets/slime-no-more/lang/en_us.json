@@ -1,4 +1,11 @@
 {
   "key.category.slimenomore.keys": "Slime No More",
-  "key.slimenomore.toggleslimechunk": "Toggle Slime Spawning in Chunk"
+  "key.slimenomore.toggleslimechunk": "Toggle Slime Spawning in Chunk",
+  "key.slimenomore.togglesdisableddisplay":"Toggle Disabled Overlay",
+  "key.slimenomore.togglesboxdisplay": "Toggle Overlay Box",
+  "key.slimenomore.togglesbillboarddisplay": "Toggle Billboard Overlay",
+
+  "text.autoconfig.slimenomore.option.renderBox": "Render Box Overlay",
+  "text.autoconfig.slimenomore.option.renderBillboard": "Render Overlay Indicator",
+  "text.autoconfig.slimenomore.option.maxSlimeChunks": "Max Number of Overlays to Render"
 }

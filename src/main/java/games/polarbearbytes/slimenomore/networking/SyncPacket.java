@@ -13,9 +13,8 @@ import java.util.ArrayList;
 /**
  * Our Server To Client packet telling it the seed
  * @param slimeChunkStates states for the currently set slime chunks
- * @param seed world seed.
  */
-public record SyncPacket(List<ChunkPos> slimeChunkStates, Long seed) implements CustomPayload {
+public record SyncPacket(List<ChunkPos> slimeChunkStates) implements CustomPayload {
     public static final Id<SyncPacket> ID = new Id<>(Identifier.of(SlimeNoMore.MOD_ID, "sync_packet"));
     public static final CustomPayload.Id<SyncPacket> PAYLOAD_ID = new CustomPayload.Id<>(Identifier.of(SlimeNoMore.MOD_ID, "sync_packet"));
 
@@ -24,7 +23,6 @@ public record SyncPacket(List<ChunkPos> slimeChunkStates, Long seed) implements 
                 ArrayList::new,
                 ChunkPos.PACKET_CODEC
             ), SyncPacket::slimeChunkStates,
-            PacketCodecs.LONG, SyncPacket::seed,
             SyncPacket::new
     );
 

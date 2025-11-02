@@ -16,7 +16,7 @@ import org.lwjgl.glfw.GLFW;
  * Our keybind handler class
  */
 public class KeyInputHandler {
-    public static final KeyBinding.Category KEY_CATEGORY_KEYS = KeyBinding.Category.create(Identifier.of("slime-no-more","key.category.slimenomore.keys"));
+    public static final KeyBinding.Category KEY_CATEGORY_KEYS = KeyBinding.Category.create(Identifier.of("slime-no-more","keys"));
     public static final String KEY_TOGGLE_SLIMECHUNK = "key.slimenomore.toggleslimechunk";
     public static final String KEY_TOGGLE_DISABLED_DISPLAY = "key.slimenomore.togglesdisableddisplay";
     public static final String KEY_TOGGLE_BOX_DISPLAY = "key.slimenomore.togglesboxdisplay";

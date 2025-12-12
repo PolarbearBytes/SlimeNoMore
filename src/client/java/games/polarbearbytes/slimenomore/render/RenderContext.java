@@ -13,6 +13,7 @@ import games.polarbearbytes.slimenomore.SlimeNoMore;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
+import net.minecraft.client.gl.GpuSampler;
 import net.minecraft.client.gl.ScissorState;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BuiltBuffer;
@@ -120,7 +121,7 @@ public class RenderContext {
         uploaded = true;
     }
 
-    protected void draw(Framebuffer framebuffer, MinecraftClient client, GpuTextureView glTextureView){
+    protected void draw(Framebuffer framebuffer, MinecraftClient client, GpuTextureView glTextureView, GpuSampler sampler){
         if(!RenderSystem.isOnRenderThread()) return;
         GpuDevice device = RenderSystem.getDevice();
         if(device == null){
@@ -148,8 +149,7 @@ public class RenderContext {
                                                    RenderSystem.getModelViewMatrix(),
                                                    colorMod,
                                                    modelOffset,
-                                                   texMatrix,
-                                                   0f);
+                                                   texMatrix);
         try(RenderPass pass = device.createCommandEncoder().createRenderPass(this.id,
                         texture1, OptionalInt.empty(),
                         texture2, OptionalDouble.empty())) {
@@ -169,7 +169,7 @@ public class RenderContext {
             }
             pass.setVertexBuffer(0, vertexBuffer);
             if (glTextureView != null){
-                pass.bindSampler("Sampler0", glTextureView);
+                pass.bindTexture("Sampler0", glTextureView, sampler);
             }
 
             pass.drawIndexed(0, 0, this.indexCount, 1);

@@ -1,5 +1,6 @@
 package games.polarbearbytes.slimenomore;
 
+import games.polarbearbytes.slimenomore.config.Config;
 import games.polarbearbytes.slimenomore.config.SlimeNoMoreClientConfig;
 import games.polarbearbytes.slimenomore.events.KeyInputHandler;
 import games.polarbearbytes.slimenomore.networking.SyncPacket;
@@ -22,8 +23,9 @@ public class SlimeNoMoreClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		KeyInputHandler.register();
-
-		AutoConfig.register(SlimeNoMoreClientConfig.class, GsonConfigSerializer::new);
+		if (!Config.USE_STUB) {
+			AutoConfig.register(SlimeNoMoreClientConfig.class, GsonConfigSerializer::new);
+		}
 
 		RendererHandler.getInstance().register(DisabledSlimeChunkRenderer.INSTANCE);
 

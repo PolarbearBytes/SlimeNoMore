@@ -1,6 +1,7 @@
 package games.polarbearbytes.slimenomore.events;
 
 import games.polarbearbytes.slimenomore.SlimeNoMoreClient;
+import games.polarbearbytes.slimenomore.config.Config;
 import games.polarbearbytes.slimenomore.config.SlimeNoMoreClientConfig;
 import games.polarbearbytes.slimenomore.networking.SlimeChunkTogglePacket;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -29,7 +30,8 @@ public class KeyInputHandler {
 
     public static void registerKeyInputs(){
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            SlimeNoMoreClientConfig config = AutoConfig.getConfigHolder(SlimeNoMoreClientConfig.class).getConfig();
+            SlimeNoMoreClientConfig config = Config.get().getConfig();
+            //SlimeNoMoreClientConfig config = AutoConfig.getConfigHolder(SlimeNoMoreClientConfig.class).getConfig();
             if(toggleSlimeChunkKey.wasPressed()){
                 if(client.player == null) return;
                 ClientPlayNetworking.send(new SlimeChunkTogglePacket(client.player.getChunkPos()));

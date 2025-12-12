@@ -93,9 +93,9 @@ public class DisabledSlimeChunkRenderer implements IRenderer {
         if(cameraEntity == null || client.player == null) return;
 
         //UPDATE
-        update(camera.getPos(), cameraEntity, client);
+        update(camera.getCameraPos(), cameraEntity, client);
         //DRAW
-        draw(camera.getPos(), client);
+        draw(camera.getCameraPos(), client);
     }
 
     public void update(Vec3d cameraPos, Entity entity, MinecraftClient client){
@@ -105,8 +105,9 @@ public class DisabledSlimeChunkRenderer implements IRenderer {
 
         build(cameraPos, client);
         TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
+
         billboardTexture = textureManager.getTexture(BILLBOARD_TEXTURE);
-        billboardTexture.setUseMipmaps(true);
+        //billboardTexture.setUseMipmaps(true);
 
         lastCamera = cameraPos;
     }
@@ -114,10 +115,10 @@ public class DisabledSlimeChunkRenderer implements IRenderer {
     public void draw(Vec3d cameraPos, MinecraftClient client) throws RuntimeException {
         SlimeNoMoreClientConfig config = AutoConfig.getConfigHolder(SlimeNoMoreClientConfig.class).getConfig();
         if(config.renderBox && boxRenderContext.isStarted() && boxRenderContext.isUploaded()) {
-            boxRenderContext.draw(null, client, null);
+            boxRenderContext.draw(null, client, null, billboardTexture.getSampler());
         }
         if(config.renderBillboard && billboardRenderContext.isStarted() && billboardRenderContext.isUploaded()) {
-            billboardRenderContext.draw(null, client, billboardTexture.getGlTextureView());
+            billboardRenderContext.draw(null, client, billboardTexture.getGlTextureView(),billboardTexture.getSampler());
         }
     }
 
@@ -182,8 +183,42 @@ public class DisabledSlimeChunkRenderer implements IRenderer {
         float y2 = (float)(maxY - cameraPos.y);
         float z2 = (float)(maxZ - cameraPos.z);
 
-        VertexRendering.drawFilledBox(new MatrixStack(), builder, x1, y1, z1, x2, y2, z2,
+        drawFilledBox(new MatrixStack(), builder, x1, y1, z1, x2, y2, z2,
                 (float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, (float) color.getAlpha() / 255);
+    }
+
+    public static void drawFilledBox(MatrixStack matrices, VertexConsumer vertexConsumers, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, float red, float green, float blue, float alpha) {
+        Matrix4f matrix4f = matrices.peek().getPositionMatrix();
+        vertexConsumers.vertex(matrix4f, minX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, minY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, minX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, minZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, maxZ).color(red, green, blue, alpha);
+        vertexConsumers.vertex(matrix4f, maxX, maxY, maxZ).color(red, green, blue, alpha);
     }
 
     private void buildBillboard(ChunkPos chunkPos, Vec3d cameraPos, BufferBuilder builder, MinecraftClient client){
